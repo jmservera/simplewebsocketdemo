@@ -1,0 +1,9 @@
+{
+  "name": "js-ws-example",
+  "version": "1.0.0",
+  "description": "ws example",
+  "main": "server.js",
+  "keywords": [],
+  "author": "Juan Manuel Servera",
+  "license": "MIT"
+}
