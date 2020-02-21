@@ -12,14 +12,13 @@ const server = http.createServer(function(request,response){
     if(serverPort===443 || serverPort==='443'){
       serverConnection=`wss://\${location.hostname}/${serverPath}`;
     }
-    console.log(serverConnection)
 
     var page=fileSystem.readFileSync(filePath,'utf8');
     page=page.replace('{{SERVERCONNECTION}}',serverConnection);
-
     response.writeHead(200,{'Content-Type':'text/html','Content-Length':Buffer.byteLength(page, 'utf8')});
     response.write(page);
     response.end();
+    console.log((new Date()) + "served page");
 } );
 
 server.listen(process.env.CLIENT_PORT||8080,function(){
