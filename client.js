@@ -9,4 +9,7 @@ const server = http.createServer(function(request,response){
     var readStream=fileSystem.createReadStream(filePath);
     readStream.pipe(response);
 } );
-server.listen(9899);
+
+server.listen(process.env.CLIENT_PORT||8080,function(){
+  console.log(`Listening on ${server.address().address}${server.address().port}`);
+});

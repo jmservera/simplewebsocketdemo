@@ -6,7 +6,9 @@ const server = http.createServer(function(request,response){
     response.writeHead(404);
     response.end();
 } );
-server.listen(9898);
+server.listen(process.env.SERVER_PORT||8081,function(){
+    console.log(`Listening on ${server.address().address}${server.address().port}`);
+});
 
 const wsServer = new WebSocketServer({
     httpServer: server
@@ -17,7 +19,7 @@ wsServer.on('request', function(request) {
 
     connection.on('message', function(message) {
       console.log('Received Message:', message.utf8Data);
-      connection.sendUTF('Hi this is WebSocket server!');
+      connection.sendUTF('Hello I\'m the server!');
     });
     connection.on('close', function(reasonCode, description) {
         console.log('Client has disconnected.');
