@@ -18,6 +18,10 @@ ws.onopen = function() {
     sendmessage();
 };
 
+ws.onerror = error => {
+  console.log(`WebSocket error: ${error}`)
+}
+
 ws.onmessage = function(e) {
   document.body.innerHTML=document.body.innerHTML+`<p>${e.data}</p>`;
   console.log("Received: '" + e.data + "'");
