@@ -17,7 +17,7 @@ const wsServer = new WebSocketServer({
 
 wsServer.on('request', function(request) {
     const connection = request.accept(null, request.origin);
-    Console.log('WS Request received.')
+    console.log('WS Request received.')
 
     connection.on('message', function(message) {
       console.log('Received ws Message:', message.utf8Data);
