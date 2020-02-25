@@ -1,11 +1,13 @@
 const http = require('http');
 const WebSocketServer = require('websocket').server;
 
-const server = http.createServer(function(request,response){
-    console.log((new Date()) + ' Received ws request for ' + request.url);
-    response.writeHead(101,'change to websocket',{'Upgrade':'websocket','Connection': 'Upgrade'});
-    response.end();
-} );
+const server = http.createServer(
+    function(request,response){
+        console.log((new Date()) + ' Received ws request for ' + request.url);
+        response.writeHead(101,{'Upgrade':'websocket','Connection': 'Upgrade'});
+        response.end();
+    }
+);
 
 server.listen(process.env.SERVER_PORT||8081,function(){
     console.log(`Listening on ${server.address().address}${server.address().port}`);
