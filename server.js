@@ -3,10 +3,10 @@ const WebSocketServer = require('websocket').server;
 
 const server = http.createServer(function(request,response){
     console.log((new Date()) + ' Received ws request for ' + request.url);
-    response.writeHead(200);
-    response.write('Use wss to access there.')
+    response.writeHead(101,'change to websocket',{'Upgrade':'websocket','Connection': 'Upgrade'});
     response.end();
 } );
+
 server.listen(process.env.SERVER_PORT||8081,function(){
     console.log(`Listening on ${server.address().address}${server.address().port}`);
 });
