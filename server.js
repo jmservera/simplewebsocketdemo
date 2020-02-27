@@ -1,13 +1,12 @@
 const http = require('http');
 const WebSocketServer = require('websocket').server;
 
-const server = http.createServer(
-    function(request,response){
-        console.log((new Date()) + ' Received ws request for ' + request.url);
-        response.writeHead(101,{'Upgrade':'websocket','Connection': 'Upgrade'});
-        response.end();
-    }
-);
+const server = http.createServer(function(request,response){
+    console.log((new Date()) + ' Received ws request for ' + request.url);
+    response.writeHead(200,'This is the websockets server, try with ws or wss.'); //101,'change to websocket',{'Upgrade':'websocket','Connection': 'Upgrade'});
+    response.write('Websockets server');
+    response.end();
+} );
 
 server.listen(process.env.SERVER_PORT||8081,function(){
     console.log(`Listening on ${server.address().address}${server.address().port}`);
@@ -26,6 +25,6 @@ wsServer.on('request', function(request) {
       connection.sendUTF('Hello I\'m the server!');
     });
     connection.on('close', function(reasonCode, description) {
-        console.log('Client has disconnected.');
+        console.log(`Client has disconnected. \n\tReason: ${reasonCode} \n\tDescription: ${description}`);
     });
 });
